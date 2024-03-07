@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace log_data_well.Data
 {
-    public class AppDataContext
+    public class AppDataContext(DbContextOptions<AppDataContext> options) : DbContext(options)
     {
         public DbSet<Specialist> Specialists { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
@@ -16,8 +16,8 @@ namespace log_data_well.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Укажите строку подключения к вашей базе данных
-            optionsBuilder.UseSqlServer("your_connection_string_here");
+            // Указываем строку подключения к SQLite базе данных
+            optionsBuilder.UseSqlite("Data Source=D:\\DB\\MSSQL15.AG2023\\MSSQL\\DATA\\PanchenkoDS_107g2_KR.mdf");
         }
     }
 }
