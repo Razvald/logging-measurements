@@ -1,22 +1,25 @@
 using log_data_well.Controlers;
+using log_data_well.Data;
 
 namespace log_data_well
 {
     public partial class MainForm : Form
     {
-        private readonly ListOrdersControl listOrders;
-        private readonly CompleteOrdersControl completeOrders;
-        private readonly AnalizationDataControl analizationData;
-        private readonly ReportsControl reports;
+        private readonly ListOrdersControl listOrders = new();
+        private readonly CompleteOrdersControl completeOrders = new();
+        private readonly AnalizationDataControl analizationData = new();
+        private readonly ReportsControl reports = new();
+
+        AppDataContext _db = new();
 
         public MainForm()
         {
             InitializeComponent();
-            // Инициализация контроллеров
-            listOrders = new ListOrdersControl();
-            completeOrders = new CompleteOrdersControl();
-            analizationData = new AnalizationDataControl();
-            reports = new ReportsControl();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = _db.Orders.ToList();
         }
 
         private List<UserControl> activeControls = new List<UserControl>(); // список активных контроллеров

@@ -28,71 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            btnListOrders = new Button();
+            btnCompleteOrders = new Button();
+            btnAnalizationData = new Button();
+            btnReports = new Button();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnListOrders
             // 
-            button1.Location = new Point(12, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnListOrders.Location = new Point(12, 12);
+            btnListOrders.Name = "btnListOrders";
+            btnListOrders.Size = new Size(94, 29);
+            btnListOrders.TabIndex = 0;
+            btnListOrders.Text = "List Orders";
+            btnListOrders.UseVisualStyleBackColor = true;
+            btnListOrders.Click += button1_Click;
             // 
-            // button2
+            // btnCompleteOrders
             // 
-            button2.Location = new Point(112, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnCompleteOrders.Location = new Point(112, 12);
+            btnCompleteOrders.Name = "btnCompleteOrders";
+            btnCompleteOrders.Size = new Size(142, 29);
+            btnCompleteOrders.TabIndex = 1;
+            btnCompleteOrders.Text = "Complete Orders";
+            btnCompleteOrders.UseVisualStyleBackColor = true;
+            btnCompleteOrders.Click += button2_Click;
             // 
-            // button3
+            // btnAnalizationData
             // 
-            button3.Location = new Point(212, 12);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 2;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btnAnalizationData.Location = new Point(260, 12);
+            btnAnalizationData.Name = "btnAnalizationData";
+            btnAnalizationData.Size = new Size(132, 29);
+            btnAnalizationData.TabIndex = 2;
+            btnAnalizationData.Text = "Analization Data";
+            btnAnalizationData.UseVisualStyleBackColor = true;
+            btnAnalizationData.Click += button3_Click;
             // 
-            // button4
+            // btnReports
             // 
-            button4.Location = new Point(312, 12);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 3;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            btnReports.Location = new Point(398, 12);
+            btnReports.Name = "btnReports";
+            btnReports.Size = new Size(94, 29);
+            btnReports.TabIndex = 3;
+            btnReports.Text = "Reports";
+            btnReports.UseVisualStyleBackColor = true;
+            btnReports.Click += button4_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 47);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 29;
+            dataGridView1.Size = new Size(776, 391);
+            dataGridView1.TabIndex = 4;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(dataGridView1);
+            Controls.Add(btnReports);
+            Controls.Add(btnAnalizationData);
+            Controls.Add(btnCompleteOrders);
+            Controls.Add(btnListOrders);
             Name = "MainForm";
             Text = "Form1";
+            Load += MainForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private Button btnListOrders;
+        private Button btnCompleteOrders;
+        private Button btnAnalizationData;
+        private Button btnReports;
+        private DataGridView dataGridView1;
     }
 }
