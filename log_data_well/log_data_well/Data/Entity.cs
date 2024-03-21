@@ -8,14 +8,6 @@
         public string Email { get; set; }
     }
 
-    public class MeasurementType
-    {
-        public int MeasurementTypeID { get; set; }
-        public string Name { get; set; }
-        public string MeasurementUnits { get; set; }
-        public string Description { get; set; }
-    }
-
     public class Order
     {
         public int OrderID { get; set; }
@@ -25,9 +17,9 @@
         public DateTime OrderDate { get; set; }
         public string OrderStatus { get; set; }
 
-        public virtual Client Client { get; set; }
-        public virtual Specialist Specialist { get; set; }
-        public virtual WellMeasurement WellMeasurement { get; set; }
+        public Client Client { get; set; }
+        public Specialist Specialist { get; set; }
+        public WellMeasurement WellMeasurement { get; set; }
     }
 
     public class Specialist
@@ -38,9 +30,9 @@
         public string Username { get; set; }
         public string Password { get; set; }
         public string AccountStatus { get; set; }
-        public int SpecializationID { get; set; }
 
-        public virtual Specialization Specialization { get; set; }
+        // Связь многие ко многим: один специалист может иметь множество специализаций
+        public ICollection<SpecialistSpecialization> SpecialistSpecializations { get; set; }
     }
 
     public class Specialization
@@ -48,6 +40,20 @@
         public int SpecializationID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        // Связь многие ко многим: одна специализация может быть у множества специалистов
+        public ICollection<SpecialistSpecialization> SpecialistSpecializations { get; set; }
+    }
+
+    // Промежуточная таблица для связи многие ко многим
+    public class SpecialistSpecialization
+    {
+        public int SpecialistSpecializationID { get; set; }
+        public int SpecialistID { get; set; }
+        public Specialist Specialist { get; set; }
+
+        public int SpecializationID { get; set; }
+        public Specialization Specialization { get; set; }
     }
 
     public class Well
@@ -57,19 +63,17 @@
         public string GeoCoordinates { get; set; }
         public double Depth { get; set; }
 
-        public virtual WellType WellType { get; set; }
+        public WellType WellType { get; set; }
     }
 
     public class WellMeasurement
     {
         public int MeasurementID { get; set; }
         public int WellID { get; set; }
-        public int MeasurementTypeID { get; set; }
         public double MeasurementValue { get; set; }
         public DateTime MeasurementDateTime { get; set; }
 
-        public virtual Well Well { get; set; }
-        public virtual MeasurementType MeasurementType { get; set; }
+        public Well Well { get; set; }
     }
 
     public class WellType

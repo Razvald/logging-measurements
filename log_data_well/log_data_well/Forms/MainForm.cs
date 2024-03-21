@@ -10,7 +10,7 @@ namespace log_data_well
         private readonly AnalizationDataControl analizationData = new();
         private readonly ReportsControl reports = new();
 
-        AppDataContext _db = new();
+        readonly AppDataContext _db = new();
 
         public MainForm()
         {
@@ -19,7 +19,8 @@ namespace log_data_well
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _db.Orders.ToList();
+            //dataGridView1.DataSource = _db.Clients;
+            //MessageBox.Show(_db.DbPath);
         }
 
         private List<UserControl> activeControls = new List<UserControl>(); // список активных контроллеров

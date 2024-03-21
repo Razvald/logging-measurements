@@ -32,8 +32,6 @@
             btnCompleteOrders = new Button();
             btnAnalizationData = new Button();
             btnReports = new Button();
-            dataGridView1 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // btnListOrders
@@ -76,22 +74,11 @@
             btnReports.UseVisualStyleBackColor = true;
             btnReports.Click += button4_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 47);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(776, 391);
-            dataGridView1.TabIndex = 4;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView1);
             Controls.Add(btnReports);
             Controls.Add(btnAnalizationData);
             Controls.Add(btnCompleteOrders);
@@ -99,7 +86,6 @@
             Name = "MainForm";
             Text = "Form1";
             Load += MainForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -109,6 +95,5 @@
         private Button btnCompleteOrders;
         private Button btnAnalizationData;
         private Button btnReports;
-        private DataGridView dataGridView1;
     }
 }
