@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace log_data_well.Data
+namespace Logging_measurements_test.Models
 {
-    class AppDataContext : DbContext
+    internal class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data source=./logging.db");
-
         public DbSet<Specialist> Specialists { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<SpecialistSpecialization> SpecialistSpecializations { get; set; }
@@ -15,6 +12,12 @@ namespace log_data_well.Data
         public DbSet<WellMeasurement> WellMeasurements { get; set; }
         public DbSet<Well> Wells { get; set; }
         public DbSet<WellType> WellTypes { get; set; }
+
+        public AppDbContext(DbContextOptions options) : base(options)
+        {
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +32,8 @@ namespace log_data_well.Data
                 new Specialist { SpecialistID = 2, FullName = "Петров Петр Петрович", Phone = "2345678901", Username = "petrov", Password = "password2", AccountStatus = "Active" },
                 new Specialist { SpecialistID = 3, FullName = "Сидоров Сидор Сидорович", Phone = "3456789012", Username = "sidorov", Password = "password3", AccountStatus = "Active" },
                 new Specialist { SpecialistID = 4, FullName = "Алексеев Алексей Алексеевич", Phone = "4567890123", Username = "alexeev", Password = "password4", AccountStatus = "Active" },
-                new Specialist { SpecialistID = 5, FullName = "Николаев Николай Николаевич", Phone = "5678901234", Username = "nikolaev", Password = "password5", AccountStatus = "Active" }
+                new Specialist { SpecialistID = 5, FullName = "Николаев Николай Николаевич", Phone = "5678901234", Username = "nikolaev", Password = "password5", AccountStatus = "Active" },
+                new Specialist { SpecialistID = 6, Username = "1", Password = "1"}
             };
 
             var specializations = new List<Specialization>
@@ -100,7 +104,7 @@ namespace log_data_well.Data
             modelBuilder.Entity<Specialist>().HasData(specialists);
             modelBuilder.Entity<Specialization>().HasData(specializations);
             modelBuilder.Entity<SpecialistSpecialization>().HasData(specialistSpecializations);
-            //modelBuilder.Entity<Order>().HasData(orders);
+            modelBuilder.Entity<Order>().HasData(orders);
             modelBuilder.Entity<Client>().HasData(clients);
             modelBuilder.Entity<WellMeasurement>().HasData(wellMeasurements);
         }
