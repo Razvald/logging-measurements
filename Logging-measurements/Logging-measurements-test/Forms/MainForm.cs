@@ -1,29 +1,40 @@
 using Logging_measurements_test.Controlers;
 using Logging_measurements_test.Models;
+using Logging_measurements_test.Services.Interfaces;
 
 namespace Logging_measurements_test
 {
-    public partial class MainForm : Form
+    internal partial class MainForm : Form
     {
+        private readonly IDbWorker _context;
+
         private readonly ListOrdersControl listOrders = new();
         private readonly CompleteOrdersControl completeOrders = new();
         private readonly AnalizationDataControl analizationData = new();
         private readonly ReportsControl reports = new();
+        public Specialist _CurrentUser { get; set; }
 
-        readonly AppDbContext _db;
-
-        public MainForm()
+        public MainForm(IDbWorker db)
         {
             InitializeComponent();
+
+            _context = db;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //dataGridView1.DataSource = _db.Clients;
-            //MessageBox.Show(_db.DbPath);
+            if (_CurrentUser.Role == "Admin")
+            {
+                MessageBox.Show("Приветсвую Администратора");
+                btnAnalizationData.Visible = true;
+            }
+            else
+            {
+                btnAnalizationData.Visible = false;
+            }
         }
 
-        private List<UserControl> activeControls = new List<UserControl>(); // список активных контроллеров
+        private List<UserControl> activeControls = new();
 
         private void RemovePreviousControl()
         {
@@ -34,41 +45,48 @@ namespace Logging_measurements_test
                     this.Controls.Remove(control);
                 }
             }
-            activeControls.Clear(); // очищаем список активных контроллеров
+            activeControls.Clear();
         }
 
         private void ShowControl(UserControl userControl)
         {
-            RemovePreviousControl(); // Удаление предыдущего контроллера
-                                     // Добавление Control на форму
+            RemovePreviousControl();
             this.Controls.Add(userControl);
-            // Установка позиции и других параметров, если необходимо
-            userControl.Location = new Point(0, 41);
-            // Добавляем контроллер в список активных
+            userControl.Location = new Point(12, 47);
             activeControls.Add(userControl);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            RemovePreviousControl(); // Удаление предыдущего контроллера
-            ShowControl(listOrders);
+            ListOrdersControl orderControl = new ListOrdersControl();
+            // Заполнение информации о заказе
+            orderControl.SetOrderInfo("2024-03-28", "Специализация", "In Progress");
+
+            // Установка позиции контрола на форме
+            orderControl.Location = new Point(10, 10);
+
+            // Добавление контрола на главную форму
+            this.Controls.Add(orderControl);
+            /*
+            RemovePreviousControl();
+            ShowControl(listOrders);*/
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            RemovePreviousControl(); // Удаление предыдущего контроллера
+            RemovePreviousControl();
             ShowControl(completeOrders);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            RemovePreviousControl(); // Удаление предыдущего контроллера
+            RemovePreviousControl();
             ShowControl(analizationData);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            RemovePreviousControl(); // Удаление предыдущего контроллера
+            RemovePreviousControl();
             ShowControl(reports);
         }
     }

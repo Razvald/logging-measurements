@@ -38,7 +38,7 @@
             // txbLogin
             // 
             txbLogin.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txbLogin.Location = new Point(163, 157);
+            txbLogin.Location = new Point(163, 113);
             txbLogin.Name = "txbLogin";
             txbLogin.Size = new Size(173, 34);
             txbLogin.TabIndex = 0;
@@ -46,7 +46,7 @@
             // txbPassword
             // 
             txbPassword.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            txbPassword.Location = new Point(163, 257);
+            txbPassword.Location = new Point(163, 213);
             txbPassword.Name = "txbPassword";
             txbPassword.Size = new Size(173, 34);
             txbPassword.TabIndex = 1;
@@ -54,7 +54,7 @@
             // btnLogin
             // 
             btnLogin.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnLogin.Location = new Point(186, 318);
+            btnLogin.Location = new Point(191, 318);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(118, 38);
             btnLogin.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(163, 128);
+            label1.Location = new Point(163, 84);
             label1.Name = "label1";
             label1.Size = new Size(72, 26);
             label1.TabIndex = 3;
@@ -76,7 +76,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(163, 228);
+            label2.Location = new Point(163, 184);
             label2.Name = "label2";
             label2.Size = new Size(82, 26);
             label2.TabIndex = 4;

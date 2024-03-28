@@ -1,6 +1,6 @@
 ﻿namespace Logging_measurements_test
 {
-    partial class Form1
+    partial class AllDataForm
     {
         /// <summary>
         ///  Required designer variable.

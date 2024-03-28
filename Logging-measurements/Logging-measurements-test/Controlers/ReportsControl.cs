@@ -1,4 +1,6 @@
-﻿namespace Logging_measurements_test.Controlers
+﻿using Logging_measurements_test.Models;
+
+namespace Logging_measurements_test.Controlers
 {
     public partial class ReportsControl : UserControl
     {
@@ -6,5 +8,12 @@
         {
             InitializeComponent();
         }
+
+        public ReportsControl(Order? selectedOrder)
+        {
+            SelectedOrder = selectedOrder;
+        }
+
+        public Order? SelectedOrder { get; }
     }
 }

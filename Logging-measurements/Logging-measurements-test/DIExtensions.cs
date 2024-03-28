@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Logging_measurements_test.Forms;
+﻿using Logging_measurements_test.Forms;
 using Logging_measurements_test.Models;
-using Logging_measurements_test.Services.Interfaces;
 using Logging_measurements_test.Services.Implementations;
+using Logging_measurements_test.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Logging_measurements_test
 {
@@ -11,7 +11,7 @@ namespace Logging_measurements_test
     {
         public static void InitServices(this ServiceCollection services)
         {
-            services.AddTransient<Form1>();
+            services.AddTransient<AllDataForm>();
             services.AddTransient<LoginForm>();
             services.AddTransient<MainForm>();
 

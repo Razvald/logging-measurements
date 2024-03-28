@@ -33,7 +33,7 @@ namespace Logging_measurements_test.Models
                 new Specialist { SpecialistID = 3, FullName = "Сидоров Сидор Сидорович", Phone = "3456789012", Username = "sidorov", Password = "password3", AccountStatus = "Active" },
                 new Specialist { SpecialistID = 4, FullName = "Алексеев Алексей Алексеевич", Phone = "4567890123", Username = "alexeev", Password = "password4", AccountStatus = "Active" },
                 new Specialist { SpecialistID = 5, FullName = "Николаев Николай Николаевич", Phone = "5678901234", Username = "nikolaev", Password = "password5", AccountStatus = "Active" },
-                new Specialist { SpecialistID = 6, Username = "1", Password = "1"}
+                new Specialist { SpecialistID = 6, Username = "1", Password = "1", Role = "Admin"}
             };
 
             var specializations = new List<Specialization>
@@ -56,11 +56,14 @@ namespace Logging_measurements_test.Models
 
             var orders = new List<Order>
             {
-                new Order { OrderID = 1, ClientID = 1, SpecialistID = 1, MeasurementID = 1, OrderDate = DateTime.Now, OrderStatus = "In Progress" },
-                new Order { OrderID = 2, ClientID = 2, SpecialistID = 2, MeasurementID = 2, OrderDate = DateTime.Now, OrderStatus = "Completed" },
-                new Order { OrderID = 3, ClientID = 3, SpecialistID = 3, MeasurementID = 3, OrderDate = DateTime.Now, OrderStatus = "In Progress" },
-                new Order { OrderID = 4, ClientID = 4, SpecialistID = 4, MeasurementID = 4, OrderDate = DateTime.Now, OrderStatus = "Completed" },
-                new Order { OrderID = 5, ClientID = 5, SpecialistID = 5, MeasurementID = 5, OrderDate = DateTime.Now, OrderStatus = "In Progress" }
+                new Order { OrderID = 1, ClientID = 1, SpecializationID = 1, SpecialistID = 1, MeasurementID = 1, OrderDate = DateTime.Now, OrderStatus = "In Progress" },
+                new Order { OrderID = 2, ClientID = 2, SpecializationID = 2, SpecialistID = 2, MeasurementID = 2, OrderDate = DateTime.Now, OrderStatus = "Completed" },
+                new Order { OrderID = 3, ClientID = 3, SpecializationID = 3, SpecialistID = 3, MeasurementID = 3, OrderDate = DateTime.Now, OrderStatus = "In Progress" },
+                new Order { OrderID = 4, ClientID = 4, SpecializationID = 4, SpecialistID = 4, MeasurementID = 4, OrderDate = DateTime.Now, OrderStatus = "Completed" },
+                new Order { OrderID = 5, ClientID = 5, SpecializationID = 5, SpecialistID = 5, MeasurementID = 5, OrderDate = DateTime.Now, OrderStatus = "In Progress" }
+                //,
+                //new Order { OrderID = 6, ClientID = 1, SpecializationID = 2, /*SpecialistID */ MeasurementID = 6, OrderDate = DateTime.Now, OrderStatus = "Waiting"},
+                //new Order { OrderID = 7, ClientID = 3, SpecializationID = 4, /*SpecialistID */ MeasurementID = 7, OrderDate = DateTime.Now, OrderStatus = "Waiting"}
             };
 
             var clients = new List<Client>
@@ -79,6 +82,9 @@ namespace Logging_measurements_test.Models
                 new WellMeasurement { MeasurementID = 3, WellID = 3, MeasurementValue = 14.8, MeasurementDateTime = DateTime.Now },
                 new WellMeasurement { MeasurementID = 4, WellID = 4, MeasurementValue = 15.7, MeasurementDateTime = DateTime.Now },
                 new WellMeasurement { MeasurementID = 5, WellID = 5, MeasurementValue = 16.3, MeasurementDateTime = DateTime.Now }
+                //,
+                //new WellMeasurement { MeasurementID = 6, WellID = 6, MeasurementValue = 0, MeasurementDateTime = DateTime.Now },
+                //new WellMeasurement { MeasurementID = 7, WellID = 7, MeasurementValue = 0, MeasurementDateTime = DateTime.Now }
             };
 
             var wellTypes = new List<WellType>
@@ -96,7 +102,10 @@ namespace Logging_measurements_test.Models
                 new Well { WellID = 2, WellTypeID = 2, GeoCoordinates = "31.9686° N, 99.9018° W", Depth = 800.0 },
                 new Well { WellID = 3, WellTypeID = 3, GeoCoordinates = "29.7604° N, 95.3698° W", Depth = 1200.0 },
                 new Well { WellID = 4, WellTypeID = 4, GeoCoordinates = "40.7128° N, 74.0060° W", Depth = 300.0 },
-                new Well { WellID = 5, WellTypeID = 5, GeoCoordinates = "51.5074° N, 0.1278° W", Depth = 700.0 }
+                new Well { WellID = 5, WellTypeID = 5, GeoCoordinates = "51.5074° N, 8.1278° W", Depth = 700.0 }
+                //,
+                //new Well { WellID = 6, WellTypeID = 3, GeoCoordinates = "24.5074° N, 54.1278° W", Depth = 400.0 },
+                //new Well { WellID = 7, WellTypeID = 4, GeoCoordinates = "62.5074° N, 37.1278° W", Depth = 800.0 }
             };
 
             modelBuilder.Entity<WellType>().HasData(wellTypes);

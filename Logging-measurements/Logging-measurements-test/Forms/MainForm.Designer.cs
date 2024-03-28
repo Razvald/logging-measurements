@@ -36,10 +36,9 @@
             // 
             // btnListOrders
             // 
-            btnListOrders.Location = new Point(10, 9);
-            btnListOrders.Margin = new Padding(3, 2, 3, 2);
+            btnListOrders.Location = new Point(12, 12);
             btnListOrders.Name = "btnListOrders";
-            btnListOrders.Size = new Size(82, 22);
+            btnListOrders.Size = new Size(94, 29);
             btnListOrders.TabIndex = 0;
             btnListOrders.Text = "List Orders";
             btnListOrders.UseVisualStyleBackColor = true;
@@ -47,10 +46,9 @@
             // 
             // btnCompleteOrders
             // 
-            btnCompleteOrders.Location = new Point(98, 9);
-            btnCompleteOrders.Margin = new Padding(3, 2, 3, 2);
+            btnCompleteOrders.Location = new Point(112, 12);
             btnCompleteOrders.Name = "btnCompleteOrders";
-            btnCompleteOrders.Size = new Size(124, 22);
+            btnCompleteOrders.Size = new Size(142, 29);
             btnCompleteOrders.TabIndex = 1;
             btnCompleteOrders.Text = "Complete Orders";
             btnCompleteOrders.UseVisualStyleBackColor = true;
@@ -58,10 +56,9 @@
             // 
             // btnAnalizationData
             // 
-            btnAnalizationData.Location = new Point(228, 9);
-            btnAnalizationData.Margin = new Padding(3, 2, 3, 2);
+            btnAnalizationData.Location = new Point(360, 12);
             btnAnalizationData.Name = "btnAnalizationData";
-            btnAnalizationData.Size = new Size(116, 22);
+            btnAnalizationData.Size = new Size(133, 29);
             btnAnalizationData.TabIndex = 2;
             btnAnalizationData.Text = "Analization Data";
             btnAnalizationData.UseVisualStyleBackColor = true;
@@ -69,10 +66,9 @@
             // 
             // btnReports
             // 
-            btnReports.Location = new Point(348, 9);
-            btnReports.Margin = new Padding(3, 2, 3, 2);
+            btnReports.Location = new Point(260, 12);
             btnReports.Name = "btnReports";
-            btnReports.Size = new Size(82, 22);
+            btnReports.Size = new Size(94, 29);
             btnReports.TabIndex = 3;
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = true;
@@ -80,14 +76,13 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 451);
             Controls.Add(btnReports);
             Controls.Add(btnAnalizationData);
             Controls.Add(btnCompleteOrders);
             Controls.Add(btnListOrders);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "Form1";
             Load += MainForm_Load;

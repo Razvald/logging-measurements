@@ -28,17 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
+            lblDate = new Label();
+            lblSpecialization = new Label();
+            lblStatus = new Label();
             SuspendLayout();
+            // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Location = new Point(0, 0);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(50, 20);
+            lblDate.TabIndex = 0;
+            lblDate.Text = "label1";
+            // 
+            // lblSpecialization
+            // 
+            lblSpecialization.AutoSize = true;
+            lblSpecialization.Location = new Point(0, 39);
+            lblSpecialization.Name = "lblSpecialization";
+            lblSpecialization.Size = new Size(50, 20);
+            lblSpecialization.TabIndex = 1;
+            lblSpecialization.Text = "label2";
+            // 
+            // lblStatus
+            // 
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(0, 80);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(50, 20);
+            lblStatus.TabIndex = 2;
+            lblStatus.Text = "label3";
             // 
             // ListOrdersControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblStatus);
+            Controls.Add(lblSpecialization);
+            Controls.Add(lblDate);
             Name = "ListOrdersControl";
-            Size = new Size(782, 515);
+            Size = new Size(171, 167);
+            Load += ListOrdersControl_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label lblDate;
+        private Label lblSpecialization;
+        private Label lblStatus;
     }
 }

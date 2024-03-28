@@ -5,11 +5,11 @@ using System.Reflection;
 
 namespace Logging_measurements_test
 {
-    internal partial class Form1 : Form
+    internal partial class AllDataForm : Form
     {
         private readonly IDbWorker _db;
 
-        public Form1(IDbWorker db)
+        public AllDataForm(IDbWorker db)
         {
             InitializeComponent();
             _db = db;

@@ -20,17 +20,21 @@ namespace Logging_measurements_test.Models
         [ForeignKey("Client")]
         public int ClientID { get; set; }
 
-        [ForeignKey("Specialist")]
-        public int SpecialistID { get; set; }
+        public int? SpecialistID { get; set; }
 
         [ForeignKey("WellMeasurement")]
-        public int MeasurementID { get; set; }
+        public int? MeasurementID { get; set; }
+
+        [ForeignKey("Specialization")]
+        public int? SpecializationID { get; set; }
+
         public DateTime OrderDate { get; set; }
-        public string? OrderStatus { get; set; }
+        public string OrderStatus { get; set; }
 
         public virtual Client Client { get; set; }
         public virtual Specialist Specialist { get; set; }
         public virtual WellMeasurement WellMeasurement { get; set; }
+        public virtual Specialization Specialization { get; set; }
     }
 
     public class Specialist
@@ -42,6 +46,7 @@ namespace Logging_measurements_test.Models
         public string? Username { get; set; }
         public string? Password { get; set; }
         public string? AccountStatus { get; set; }
+        public string? Role { get; set; }
 
         // Связь многие ко многим: один специалист может иметь множество специализаций
         public virtual ICollection<SpecialistSpecialization> SpecialistSpecializations { get; set; }
@@ -90,7 +95,7 @@ namespace Logging_measurements_test.Models
         public int MeasurementID { get; set; }
         public int WellID { get; set; }
         public double? MeasurementValue { get; set; }
-        public DateTime MeasurementDateTime { get; set; }
+        public DateTime? MeasurementDateTime { get; set; }
 
         public virtual Well Well { get; set; }
     }
