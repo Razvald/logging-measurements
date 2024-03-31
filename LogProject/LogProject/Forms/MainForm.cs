@@ -81,12 +81,31 @@ namespace LogProject.Forms
                     0, 0, 0)
                 };
 
+                // Привязываем метод UpdateValues к событию изменения выбора в комбобоксе заказа
+                reportsControl.OrderClicked += ReportControl_OrderClicked; // Добавляем обработчик события
+
                 // Подписываемся на события кнопок в ReportControl
                 reportsControl.SaveClicked += ReportsControl_SaveClicked;
                 reportsControl.CancelClicked += ReportsControl_CancelClicked;
 
                 flowLayoutPanel1.Controls.Clear();
                 flowLayoutPanel1.Controls.Add(reportsControl);
+            }
+        }
+        private ReportControl reportsControl;
+        private void UpdateValues(object sender, EventArgs e)
+        {
+            var _orders = _dbContext.Orders.ToList();
+            var selectedOrderId = ((ComboBox)sender).SelectedItem as int?;
+            if (selectedOrderId.HasValue)
+            {
+                var selectedOrder = _orders.FirstOrDefault(order => order.OrderID == selectedOrderId.Value);
+                if (selectedOrder != null)
+                {
+                    // Пример заполнения значений
+                    reportsControl.txbWellDepth.Text = selectedOrder.WellMeasurement.Well.Depth.ToString();
+                    reportsControl.txbMeasurementValue.Text = selectedOrder.WellMeasurement.MeasurementValue.ToString();
+                }
             }
         }
 
@@ -269,6 +288,44 @@ namespace LogProject.Forms
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
+                }
+            }
+        }
+
+        private void ReportControl_OrderClicked(object sender, EventArgs e)
+        {
+            ReportControl reportsControl = (ReportControl)sender;
+
+            // Получаем выбранный заказ
+            int selectedOrderId = (sender as ReportControl).SelectedOrderId;
+
+            // Проверяем, что выбранный заказ не равен null
+            if (selectedOrderId != null)
+            {
+                // Получаем данные заказа из базы данных
+                var selectedOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
+
+                // Проверяем, что заказ найден в базе данных и не равен null
+                if (selectedOrder != null)
+                {
+                    // Получаем данные измерения для выбранного заказа
+                    var wellMeasurement = _dbContext.WellMeasurements.FirstOrDefault(wm => wm.MeasurementID == selectedOrder.MeasurementID);
+
+                    // Проверяем, что данные измерения не равны null
+                    if (wellMeasurement != null)
+                    {
+                        // Получаем данные скважины для выбранного заказа
+                        var well = _dbContext.Wells.FirstOrDefault(w => w.WellID == selectedOrder.WellMeasurement.WellID);
+
+                        // Проверяем, что данные скважины не равны null
+                        if (well != null)
+                        {
+                            // Присваиваем значения элементам управления в соответствии с данными выбранного заказа
+                            reportsControl.txbWellDepth.Text = well.Depth.ToString();
+                            reportsControl.txbMeasurementValue.Text = wellMeasurement.MeasurementValue.ToString();
+                            reportsControl.cmbWellType.Text = well.WellType.Name.ToString();
+                        }
+                    }
                 }
             }
         }

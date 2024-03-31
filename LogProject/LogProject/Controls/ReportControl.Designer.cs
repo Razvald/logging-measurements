@@ -99,6 +99,7 @@
             cmbOrder.Name = "cmbOrder";
             cmbOrder.Size = new Size(127, 29);
             cmbOrder.TabIndex = 7;
+            cmbOrder.SelectedIndexChanged += cmbOrder_SelectedIndexChanged;
             // 
             // cmbWellType
             // 
@@ -178,11 +179,11 @@
         private Label label3;
         private Label label6;
         private Label label7;
-        private ComboBox cmbOrder;
-        private ComboBox cmbWellType;
-        private TextBox txbWellDepth;
         private Button btnCancel;
         private Button btnSave;
-        private TextBox txbMeasurementValue;
+        public ComboBox cmbOrder;
+        public ComboBox cmbWellType;
+        public TextBox txbWellDepth;
+        public TextBox txbMeasurementValue;
     }
 }

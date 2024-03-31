@@ -1,13 +1,15 @@
 ﻿using LogProject.Database.Entities;
+using System.Collections.Generic;
 
 namespace LogProject.Controls
 {
     public partial class ReportControl : UserControl
     {
-        private List<Order> _orders;
-        private List<WellType> _wellTypes;
+        private readonly List<Order> _orders;
+        private readonly List<WellType> _wellTypes;
         public event EventHandler SaveClicked;
         public event EventHandler CancelClicked;
+        public event EventHandler OrderClicked;
         public string SelectedWellType => cmbWellType.SelectedItem?.ToString();
         public double WellDepth => double.Parse(txbWellDepth.Text);
         public double MeasurementValue => double.Parse(txbMeasurementValue.Text);
@@ -46,6 +48,11 @@ namespace LogProject.Controls
         private void btnCancel_Click(object sender, EventArgs e)
         {
             CancelClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void cmbOrder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OrderClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }
