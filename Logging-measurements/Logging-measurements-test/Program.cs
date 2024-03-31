@@ -15,7 +15,7 @@ namespace Logging_measurements_test
             _serviceProvider = services.BuildServiceProvider();
 
             ApplicationConfiguration.Initialize();
-            Application.Run(_serviceProvider.GetRequiredService<LoginForm>());
+            Application.Run(_serviceProvider.GetRequiredService<AllDataForm>());
         }
     }
 }

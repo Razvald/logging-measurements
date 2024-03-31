@@ -8,7 +8,6 @@ namespace Logging_measurements_test
     {
         private readonly IDbWorker _context;
 
-        private readonly ListOrdersControl listOrders = new();
         private readonly CompleteOrdersControl completeOrders = new();
         private readonly AnalizationDataControl analizationData = new();
         private readonly ReportsControl reports = new();
@@ -59,14 +58,29 @@ namespace Logging_measurements_test
         private void button1_Click(object sender, EventArgs e)
         {
             ListOrdersControl orderControl = new ListOrdersControl();
-            // Заполнение информации о заказе
-            orderControl.SetOrderInfo("2024-03-28", "Специализация", "In Progress");
 
-            // Установка позиции контрола на форме
-            orderControl.Location = new Point(10, 10);
+            IEnumerable<Order> orders = _context.Orders;
 
-            // Добавление контрола на главную форму
-            this.Controls.Add(orderControl);
+            // Начальная позиция первого контрола
+            int startY = 10;
+            int spacing = 5; // Промежуток между контролами
+
+            foreach (var order in orders)
+            {
+                // Создание и настройка нового контрола заказа
+                orderControl.SetOrderInfo(order.OrderDate.ToString(), order.Specialization.Name, order.OrderStatus);
+
+                // Расчет позиции контрола
+                orderControl.Location = new Point(10, startY);
+
+                // Добавление контрола на форму
+                this.Controls.Add(orderControl);
+
+                // Обновление позиции startY для следующего контрола
+                startY += orderControl.Height + spacing;
+            }
+
+
             /*
             RemovePreviousControl();
             ShowControl(listOrders);*/
