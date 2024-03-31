@@ -39,7 +39,7 @@
             formsPlot1.DisplayScale = 1F;
             formsPlot1.Location = new Point(3, 80);
             formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new Size(578, 368);
+            formsPlot1.Size = new Size(578, 627);
             formsPlot1.TabIndex = 0;
             // 
             // cmbWellType
@@ -82,7 +82,7 @@
             Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             Margin = new Padding(4);
             Name = "DataAnalizeControl";
-            Size = new Size(584, 451);
+            Size = new Size(584, 710);
             ResumeLayout(false);
             PerformLayout();
         }
