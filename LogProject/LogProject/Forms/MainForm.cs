@@ -393,4 +393,4 @@ namespace LogProject.Forms
         }
     }
 }
-// https://scottplot.net/cookbook/5.0/
+//https://scottplot.net/cookbook/5.0/
