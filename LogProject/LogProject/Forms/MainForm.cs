@@ -392,8 +392,7 @@ namespace LogProject.Forms
             //cmbAdd.SelectedIndex = 0;
             cmbAdd.Items.Add("Создать заказ");
             cmbAdd.Items.Add("Создать специалиста");
-            cmbAdd.Items.Add("Создать заказ");
-            cmbAdd.Items.Add("Создать заказ");
+            cmbAdd.Items.Add("Связать специализацию");
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -414,6 +413,10 @@ namespace LogProject.Forms
             {
                 CreateUser(sender, e);
             }
+            if (cmbAdd.SelectedItem?.ToString() == "Связать специализацию")
+            {
+                CreateSS(sender, e);
+            }
         }
 
         private void CreateUser(object sender, EventArgs e)
@@ -424,6 +427,106 @@ namespace LogProject.Forms
 
             flowLayoutPanel1.Controls.Clear();
             flowLayoutPanel1.Controls.Add(createSpecialistControl);
+        }
+
+        private void CreateSS(object sender, EventArgs e)
+        {
+            var specialist = _dbContext.Specialists.ToList();
+            var specialisation = _dbContext.Specializations.ToList();
+            CreateSpecSpecControl specControl = new(specialist, specialisation);
+            specControl.SaveClicked += CreateSSControl_SaveClicked;
+            specControl.Spec1Clicked += Spec1Control_SpecClicked;
+            specControl.Spec2Clicked += Spec2Control_SpecClicked;
+
+            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel1.Controls.Add(specControl);
+        }
+
+        private void Spec2Control_SpecClicked(object sender, EventArgs e)
+        {
+            var specControl = (CreateSpecSpecControl)sender;
+            if (specControl.Specialization != null)
+            {
+                int selectedSpecializationID = int.Parse(specControl.Specialization);
+
+                Specialization selectedSpecialization = _dbContext.Specializations
+                    .FirstOrDefault(s => s.SpecializationID == selectedSpecializationID); ;
+
+                if (selectedSpecialization != null)
+                {
+                    specControl.label3.Text = selectedSpecialization.Name;
+                }
+            }
+            else
+            {
+                specControl.label3.Text = "";
+            }
+        }
+
+        private void Spec1Control_SpecClicked(object sender, EventArgs e)
+        {
+            var specControl = (CreateSpecSpecControl)sender;
+            if (specControl.Specialist != null)
+            {
+                int selectedSpecialistID = int.Parse(specControl.Specialist);
+
+                // Находим специалиста по его идентификатору
+                Specialist selectedSpecialist = _dbContext.Specialists
+                    .Include(s => s.SpecialistSpecializations)
+                    .ThenInclude(ss => ss.Specialization)
+                    .FirstOrDefault(s => s.SpecialistID == selectedSpecialistID);
+
+                if (selectedSpecialist != null)
+                {
+                    // Отображаем имя специалиста в текстовом поле
+                    specControl.label2.Text = selectedSpecialist.FullName;
+
+                    // Проверяем, есть ли у специалиста специализация
+                    var specialization = selectedSpecialist.SpecialistSpecializations.FirstOrDefault();
+                    if (specialization != null)
+                    {
+                        specControl.label4.Text = specialization.Specialization.Name; // Отображаем название специализации
+                    }
+                    else
+                    {
+                        specControl.label4.Text = "Нет специализации";
+                    }
+                }
+            }
+            else
+            {
+                // Если не выбран специалист, очищаем отображаемые данные
+                specControl.label2.Text = "";
+                specControl.label4.Text = "";
+            }
+        }
+
+        private void CreateSSControl_SaveClicked(object sender, EventArgs e)
+        {
+            CreateSpecSpecControl specControl = (CreateSpecSpecControl)sender;
+
+            string Specialist = specControl.Specialist;
+            string Specialization = specControl.Specialization;
+
+            int parsedSpecialistID = int.Parse(Specialist);
+            int parsedSpecializationID = int.Parse(Specialization);
+
+            SpecialistSpecialization specialistSpecialization = new SpecialistSpecialization
+            {
+                SpecialistID = parsedSpecialistID,
+                SpecializationID = parsedSpecializationID
+            };
+
+            try
+            {
+                _dbContext.SpecialistSpecializations.Add(specialistSpecialization);
+                _dbContext.SaveChanges();
+                MessageBox.Show("Специалист успешно создан.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
+            }
         }
 
         private void CreateUserControl_SaveClicked(object sender, EventArgs e)
