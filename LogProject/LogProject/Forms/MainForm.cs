@@ -26,18 +26,7 @@ namespace LogProject.Forms
         private bool IsAdminUser(int id)
         {
             // Проверяем, есть ли администратор среди специалистов
-            var admin = _dbContext.Specialists.FirstOrDefault(s => s.Role == Role.Administrator);
-            if (admin.SpecialistID == id)
-            {
-                return true;
-            }
-            else { return false; }
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            var orders = GetOrdersWithStatus(OrderStatus.Waiting, OrderStatus.Cancelled);
-            DisplayOrders(orders);
+            return _dbContext.Specialists.Any(s => s.Role == Role.Administrator && s.SpecialistID == id);
         }
 
         private void btnOrderList_Click(object sender, EventArgs e)
@@ -89,23 +78,7 @@ namespace LogProject.Forms
             }
         }
 
-        private ReportControl reportsControl;
-        private void UpdateValues(object sender, EventArgs e)
-        {
-            var _orders = _dbContext.Orders.ToList();
-            var selectedOrderId = ((ComboBox)sender).SelectedItem as int?;
-            if (selectedOrderId.HasValue)
-            {
-                var selectedOrder = _orders.FirstOrDefault(order => order.OrderID == selectedOrderId.Value);
-                if (selectedOrder != null)
-                {
-                    reportsControl.txbWellDepth.Text = selectedOrder.WellMeasurement.Well.Depth.ToString();
-                    reportsControl.txbMeasurementValue.Text = selectedOrder.WellMeasurement.MeasurementValue.ToString();
-                }
-            }
-        }
-
-        private void btnCreateOrder_Click(object sender, EventArgs e)
+        private void CreateOrder(object sender, EventArgs e)
         {
             var clients = _dbContext.Clients.ToList();
             var spec = _dbContext.Specializations.ToList();
@@ -174,13 +147,12 @@ namespace LogProject.Forms
             {
                 _dbContext.Orders.Add(order);
                 _dbContext.SaveChanges();
+                MessageBox.Show("Заказ успешно создан.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
             }
-
-            MessageBox.Show("Заказ успешно создан.");
         }
 
         private void ReportsControl_SaveClicked(object sender, EventArgs e)
@@ -279,15 +251,35 @@ namespace LogProject.Forms
 
             int selectedOrderId = (sender as ReportControl).SelectedOrderId;
 
-            var selectedOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
+            // Проверяем, что выбранный заказ не равен null
+            if (selectedOrderId != null)
+            {
+                // Получаем данные заказа из базы данных
+                var selectedOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
 
-            var wellMeasurement = _dbContext.WellMeasurements.FirstOrDefault(wm => wm.MeasurementID == selectedOrder.MeasurementID);
+                // Проверяем, что заказ найден в базе данных и не равен null
+                if (selectedOrder != null)
+                {
+                    // Получаем данные измерения для выбранного заказа
+                    var wellMeasurement = _dbContext.WellMeasurements.FirstOrDefault(wm => wm.MeasurementID == selectedOrder.MeasurementID);
 
-            var well = _dbContext.Wells.FirstOrDefault(w => w.WellID == selectedOrder.WellMeasurement.WellID);
+                    // Проверяем, что данные измерения не равны null
+                    if (wellMeasurement != null)
+                    {
+                        // Получаем данные скважины для выбранного заказа
+                        var well = _dbContext.Wells.FirstOrDefault(w => w.WellID == selectedOrder.WellMeasurement.WellID);
 
-            reportsControl.txbWellDepth.Text = well.Depth.ToString();
-            reportsControl.txbMeasurementValue.Text = wellMeasurement.MeasurementValue.ToString();
-
+                        // Проверяем, что данные скважины не равны null
+                        if (well != null)
+                        {
+                            // Присваиваем значения элементам управления в соответствии с данными выбранного заказа
+                            reportsControl.txbWellDepth.Text = well.Depth.ToString();
+                            reportsControl.txbMeasurementValue.Text = wellMeasurement.MeasurementValue.ToString();
+                            reportsControl.cmbWellType.Text = well.WellType.Name.ToString();
+                        }
+                    }
+                }
+            }
         }
 
         private void OrderControl_Click(object sender, EventArgs e)
@@ -392,12 +384,84 @@ namespace LogProject.Forms
             }
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            var orders = GetOrdersWithStatus(OrderStatus.Waiting, OrderStatus.Cancelled);
+            DisplayOrders(orders);
+
+            //cmbAdd.SelectedIndex = 0;
+            cmbAdd.Items.Add("Создать заказ");
+            cmbAdd.Items.Add("Создать специалиста");
+            cmbAdd.Items.Add("Создать заказ");
+            cmbAdd.Items.Add("Создать заказ");
+        }
+
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Close();
 
             LoginForm loginForm = new();
             loginForm.Show();
+        }
+
+        private void cmbAdd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbAdd.SelectedItem?.ToString() == "Создать заказ")
+            {
+                CreateOrder(sender, e);
+            }
+            if (cmbAdd.SelectedItem?.ToString() == "Создать специалиста")
+            {
+                CreateUser(sender, e);
+            }
+        }
+
+        private void CreateUser(object sender, EventArgs e)
+        {
+            var roles = Enum.GetValues(typeof(Role)).Cast<Role>().ToList();
+            CreateSpecialistControl createSpecialistControl = new(roles);
+            createSpecialistControl.SaveClicked += CreateUserControl_SaveClicked;
+
+            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel1.Controls.Add(createSpecialistControl);
+        }
+
+        private void CreateUserControl_SaveClicked(object sender, EventArgs e)
+        {
+            CreateSpecialistControl createSpecialist = (CreateSpecialistControl)sender;
+
+            string Name = createSpecialist.SName;
+            string Phone = createSpecialist.Phone;
+            string Password = createSpecialist.Password;
+            string Login = createSpecialist.Login;
+
+            // Преобразуем строковое значение роли в перечисление Role
+            Role role;
+            if (!Enum.TryParse(createSpecialist.Role, out role))
+            {
+                MessageBox.Show("Ошибка при определении роли.");
+                return;
+            }
+
+            Specialist specialist = new Specialist
+            {
+                FullName = Name,
+                Phone = Phone,
+                Password = Password,
+                Username = Login,
+                Role = role // Присваиваем перечисление Role
+            };
+
+            try
+            {
+                _dbContext.Specialists.Add(specialist);
+                _dbContext.SaveChanges();
+                MessageBox.Show("Специалист успешно создан.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
+            }
         }
     }
 }

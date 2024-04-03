@@ -77,6 +77,7 @@
             // 
             // txbClientName
             // 
+            txbClientName.Enabled = false;
             txbClientName.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             txbClientName.Location = new Point(423, 12);
             txbClientName.Name = "txbClientName";
@@ -116,6 +117,7 @@
             // 
             // txbClientPhone
             // 
+            txbClientPhone.Enabled = false;
             txbClientPhone.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             txbClientPhone.Location = new Point(386, 53);
             txbClientPhone.Name = "txbClientPhone";
@@ -135,6 +137,7 @@
             // 
             // txbClientEmail
             // 
+            txbClientEmail.Enabled = false;
             txbClientEmail.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             txbClientEmail.Location = new Point(365, 95);
             txbClientEmail.Name = "txbClientEmail";

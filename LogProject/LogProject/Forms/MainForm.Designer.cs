@@ -101,6 +101,7 @@
             cmbAdd.Size = new Size(154, 25);
             cmbAdd.TabIndex = 6;
             cmbAdd.Visible = false;
+            cmbAdd.SelectedIndexChanged += cmbAdd_SelectedIndexChanged;
             // 
             // MainForm
             // 

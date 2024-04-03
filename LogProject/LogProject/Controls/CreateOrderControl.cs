@@ -44,6 +44,7 @@ namespace LogProject.Controls
             txbClientName.Enabled = isNewClient;
             txbClientPhone.Enabled = isNewClient;
             txbClientEmail.Enabled = isNewClient;
+            cmbClients.Enabled = !isNewClient;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
