@@ -34,13 +34,8 @@ namespace LogProject
 
         private bool IsValidUser(string username, string password)
         {
-            // Чтение строки подключения из файла конфигурации
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json") // logging-measurements\LogProject\LogProject\bin\Debug\net6.0-windows\
-                .Build();
-
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            string connectionString = "Server=(local); Database=LogProject; Trusted_Connection=True; Integrated Security=true; MultipleActiveResultSets=true; TrustServerCertificate=true;";
+            //string connectionString = "Data Source=DBSRV\\AG2023; Initial Catalog=PanchenkoDS_107g2; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
 
             // Создание конфигурации для подключения к базе данных
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();

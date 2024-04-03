@@ -2,7 +2,6 @@
 using LogProject.Database;
 using LogProject.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace LogProject.Forms
 {
@@ -17,11 +16,10 @@ namespace LogProject.Forms
             _userId = userId;
             _dbContext = new AppDbContext(CreateOptions());
 
-            // Показать кнопку создания нового заказа только для администратора
             if (IsAdminUser(_userId))
             {
                 btnGraph.Visible = true;
-                btnCreateOrder.Visible = true;
+                cmbAdd.Visible = true;
             }
         }
 
@@ -31,7 +29,7 @@ namespace LogProject.Forms
             var admin = _dbContext.Specialists.FirstOrDefault(s => s.Role == Role.Administrator);
             if (admin.SpecialistID == id)
             {
-                return true; // Если администратор найден, возвращаем true, иначе false
+                return true;
             }
             else { return false; }
         }
@@ -76,15 +74,13 @@ namespace LogProject.Forms
 
                 ReportControl reportsControl = new(myOrders, wellTypes)
                 {
-                    Anchor = AnchorStyles.None, // Отключаем привязку к краям
+                    Anchor = AnchorStyles.None,
                     Margin = new Padding((flowLayoutPanel1.Width - Width) / 4,
                     0, 0, 0)
                 };
 
-                // Привязываем метод UpdateValues к событию изменения выбора в комбобоксе заказа
-                reportsControl.OrderClicked += ReportControl_OrderClicked; // Добавляем обработчик события
+                reportsControl.OrderClicked += ReportControl_OrderClicked;
 
-                // Подписываемся на события кнопок в ReportControl
                 reportsControl.SaveClicked += ReportsControl_SaveClicked;
                 reportsControl.CancelClicked += ReportsControl_CancelClicked;
 
@@ -92,6 +88,7 @@ namespace LogProject.Forms
                 flowLayoutPanel1.Controls.Add(reportsControl);
             }
         }
+
         private ReportControl reportsControl;
         private void UpdateValues(object sender, EventArgs e)
         {
@@ -102,7 +99,6 @@ namespace LogProject.Forms
                 var selectedOrder = _orders.FirstOrDefault(order => order.OrderID == selectedOrderId.Value);
                 if (selectedOrder != null)
                 {
-                    // Пример заполнения значений
                     reportsControl.txbWellDepth.Text = selectedOrder.WellMeasurement.Well.Depth.ToString();
                     reportsControl.txbMeasurementValue.Text = selectedOrder.WellMeasurement.MeasurementValue.ToString();
                 }
@@ -122,15 +118,12 @@ namespace LogProject.Forms
 
         private void btnGraph_Click(object sender, EventArgs e)
         {
-            // Получаем данные о скважинах и измерениях из вашего контекста базы данных
             var wells = _dbContext.Wells.ToArray();
             var wellMeasurements = _dbContext.WellMeasurements.ToArray();
             var wellTypes = _dbContext.WellTypes.ToArray();
 
-            // Создаем экземпляр UserControl с передачей данных о скважинах и измерениях
             DataAnalizeControl dataAnalizeControl = new(wells, wellMeasurements, wellTypes);
 
-            // Очищаем и добавляем UserControl на панель
             flowLayoutPanel1.Controls.Clear();
             flowLayoutPanel1.Controls.Add(dataAnalizeControl);
         }
@@ -149,7 +142,6 @@ namespace LogProject.Forms
 
             if (createNewClient)
             {
-                // Создаем нового клиента
                 Client client = new Client
                 {
                     Name = clientName,
@@ -161,19 +153,15 @@ namespace LogProject.Forms
                 _dbContext.Clients.Add(client);
                 _dbContext.SaveChanges();
 
-                // Получаем ID нового клиента
                 clientId = client.ClientID;
             }
             else if (!string.IsNullOrEmpty(selectedClient))
             {
-                // Если выбран существующий клиент из списка, получаем его ID
                 clientId = _dbContext.Clients.FirstOrDefault(c => c.Name == selectedClient)?.ClientID ?? 0;
             }
 
-            // Получаем ID специализации
             int specializationId = _dbContext.Specializations.FirstOrDefault(s => s.Name == specialization)?.SpecializationID ?? 0;
 
-            // Создаем новый заказ
             Order order = new()
             {
                 ClientID = clientId,
@@ -184,7 +172,6 @@ namespace LogProject.Forms
 
             try
             {
-                // Добавляем заказ в базу данных
                 _dbContext.Orders.Add(order);
                 _dbContext.SaveChanges();
             }
@@ -207,12 +194,11 @@ namespace LogProject.Forms
             try
             {
                 Random random = new();
-                double latitude = Math.Round(random.NextDouble() * (90 - (-90)) - 90, 3); // Округление широты до 3 знаков после запятой
-                double longitude = Math.Round(random.NextDouble() * (180 - (-180)) - 180, 3); // Округление долготы до 3 знаков после запятой
+                double latitude = Math.Round(random.NextDouble() * (90 - (-90)) - 90, 3);
+                double longitude = Math.Round(random.NextDouble() * (180 - (-180)) - 180, 3);
                 string geoCoordinates = $"{latitude:F3}° {(latitude >= 0 ? "N" : "S")}, {longitude:F3}° {(longitude >= 0 ? "E" : "W")}";
                 // Здесь F3 означает форматирование с фиксированным количеством знаков после запятой (3 в данном случае).
 
-                // Создание новой записи Well
                 var well = new Well
                 {
                     WellTypeID = _dbContext.WellTypes.FirstOrDefault(wt => wt.Name == selectedWellType)?.WellTypeID ?? 1,
@@ -223,17 +209,16 @@ namespace LogProject.Forms
                 try
                 {
                     _dbContext.Wells.Add(well);
-                    _dbContext.SaveChanges(); // Сохранение изменений и получение WellID
+                    _dbContext.SaveChanges();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
                 }
 
-                // Создание новой записи WellMeasurement
                 var wellMeasurement = new WellMeasurement
                 {
-                    WellID = well.WellID, // Установка WellID после сохранения Well
+                    WellID = well.WellID,
                     MeasurementValue = measurementValue,
                     MeasurementDateTime = DateTime.Now
                 };
@@ -251,11 +236,9 @@ namespace LogProject.Forms
                 var order = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
                 if (order != null)
                 {
-                    // Изменение свойств заказа
                     order.OrderStatus = OrderStatus.Completed;
                     order.OrderDate = DateTime.Now;
                     order.MeasurementID = wellMeasurement.MeasurementID;
-                    // Добавление других свойств заказа, если необходимо
                 }
                 _dbContext.SaveChanges();
 
@@ -275,64 +258,40 @@ namespace LogProject.Forms
             int selectedOrderId = reportsControl.SelectedOrderId;
 
             var order = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
-            if (order != null)
-            {
-                // Изменение свойств заказа
-                order.OrderStatus = OrderStatus.Cancelled;
-                order.SpecialistID = null;
 
-                try
-                {
-                    _dbContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
-                }
+            order.OrderStatus = OrderStatus.Cancelled;
+            order.SpecialistID = null;
+
+            try
+            {
+                _dbContext.SaveChanges();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
+            }
+
         }
 
         private void ReportControl_OrderClicked(object sender, EventArgs e)
         {
             ReportControl reportsControl = (ReportControl)sender;
 
-            // Получаем выбранный заказ
             int selectedOrderId = (sender as ReportControl).SelectedOrderId;
 
-            // Проверяем, что выбранный заказ не равен null
-            if (selectedOrderId != null)
-            {
-                // Получаем данные заказа из базы данных
-                var selectedOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
+            var selectedOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
 
-                // Проверяем, что заказ найден в базе данных и не равен null
-                if (selectedOrder != null)
-                {
-                    // Получаем данные измерения для выбранного заказа
-                    var wellMeasurement = _dbContext.WellMeasurements.FirstOrDefault(wm => wm.MeasurementID == selectedOrder.MeasurementID);
+            var wellMeasurement = _dbContext.WellMeasurements.FirstOrDefault(wm => wm.MeasurementID == selectedOrder.MeasurementID);
 
-                    // Проверяем, что данные измерения не равны null
-                    if (wellMeasurement != null)
-                    {
-                        // Получаем данные скважины для выбранного заказа
-                        var well = _dbContext.Wells.FirstOrDefault(w => w.WellID == selectedOrder.WellMeasurement.WellID);
+            var well = _dbContext.Wells.FirstOrDefault(w => w.WellID == selectedOrder.WellMeasurement.WellID);
 
-                        // Проверяем, что данные скважины не равны null
-                        if (well != null)
-                        {
-                            // Присваиваем значения элементам управления в соответствии с данными выбранного заказа
-                            reportsControl.txbWellDepth.Text = well.Depth.ToString();
-                            reportsControl.txbMeasurementValue.Text = wellMeasurement.MeasurementValue.ToString();
-                            reportsControl.cmbWellType.Text = well.WellType.Name.ToString();
-                        }
-                    }
-                }
-            }
+            reportsControl.txbWellDepth.Text = well.Depth.ToString();
+            reportsControl.txbMeasurementValue.Text = wellMeasurement.MeasurementValue.ToString();
+
         }
 
         private void OrderControl_Click(object sender, EventArgs e)
         {
-            // Получаем экземпляр OrderControl, который был нажат
             OrderControl clickedControl = (OrderControl)sender;
             int orderId = int.Parse(clickedControl.OrderId);
 
@@ -358,7 +317,6 @@ namespace LogProject.Forms
                 return;
             }
 
-            // Обновляем статус заказа и привязываем его к текущему пользователю (рабочему)
             order.OrderStatus = OrderStatus.InProgress;
             order.SpecialistID = _userId;
 
@@ -396,14 +354,10 @@ namespace LogProject.Forms
             return orders;
         }
 
-        private DbContextOptions<AppDbContext> CreateOptions()
+        private static DbContextOptions<AppDbContext> CreateOptions()
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            string connectionString = "Server=(local); Database=LogProject; Trusted_Connection=True; Integrated Security=true; MultipleActiveResultSets=true; TrustServerCertificate=true;";
+            //string connectionString = "Data Source=DBSRV\\AG2023; Initial Catalog=PanchenkoDS_107g2; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
 
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
@@ -432,7 +386,6 @@ namespace LogProject.Forms
             {
                 OrderControl orderControl = CreateOrderControl(order);
 
-                // Добавляем обработчик события клика
                 orderControl.Click += OrderControl_Click;
 
                 flowLayoutPanel1.Controls.Add(orderControl);
@@ -441,10 +394,8 @@ namespace LogProject.Forms
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // Закрываем текущую форму
             this.Close();
 
-            // Открываем форму входа
             LoginForm loginForm = new();
             loginForm.Show();
         }

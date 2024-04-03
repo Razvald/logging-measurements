@@ -32,16 +32,16 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnMyOrders = new Button();
             btnReport = new Button();
-            btnCreateOrder = new Button();
             btnGraph = new Button();
+            cmbAdd = new ComboBox();
             SuspendLayout();
             // 
             // btnOrderList
             // 
-            btnOrderList.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnOrderList.Font = new Font("Times New Roman", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnOrderList.Location = new Point(12, 12);
             btnOrderList.Name = "btnOrderList";
-            btnOrderList.Size = new Size(141, 37);
+            btnOrderList.Size = new Size(132, 37);
             btnOrderList.TabIndex = 0;
             btnOrderList.Text = "Доступные заказы";
             btnOrderList.UseVisualStyleBackColor = true;
@@ -60,10 +60,10 @@
             // 
             // btnMyOrders
             // 
-            btnMyOrders.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnMyOrders.Location = new Point(159, 12);
+            btnMyOrders.Font = new Font("Times New Roman", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnMyOrders.Location = new Point(150, 12);
             btnMyOrders.Name = "btnMyOrders";
-            btnMyOrders.Size = new Size(134, 37);
+            btnMyOrders.Size = new Size(127, 37);
             btnMyOrders.TabIndex = 2;
             btnMyOrders.Text = "Принятые заказы";
             btnMyOrders.UseVisualStyleBackColor = true;
@@ -71,46 +71,44 @@
             // 
             // btnReport
             // 
-            btnReport.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnReport.Location = new Point(299, 12);
+            btnReport.Font = new Font("Times New Roman", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnReport.Location = new Point(283, 12);
             btnReport.Name = "btnReport";
-            btnReport.Size = new Size(130, 37);
+            btnReport.Size = new Size(122, 37);
             btnReport.TabIndex = 3;
             btnReport.Text = "Составить отчет";
             btnReport.UseVisualStyleBackColor = true;
             btnReport.Click += btnReport_Click;
             // 
-            // btnCreateOrder
-            // 
-            btnCreateOrder.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCreateOrder.Location = new Point(530, 12);
-            btnCreateOrder.Name = "btnCreateOrder";
-            btnCreateOrder.Size = new Size(108, 37);
-            btnCreateOrder.TabIndex = 4;
-            btnCreateOrder.Text = "Создать заказ";
-            btnCreateOrder.UseVisualStyleBackColor = true;
-            btnCreateOrder.Visible = false;
-            btnCreateOrder.Click += btnCreateOrder_Click;
-            // 
             // btnGraph
             // 
-            btnGraph.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnGraph.Location = new Point(435, 12);
+            btnGraph.Font = new Font("Times New Roman", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnGraph.Location = new Point(411, 12);
             btnGraph.Name = "btnGraph";
-            btnGraph.Size = new Size(89, 37);
+            btnGraph.Size = new Size(67, 37);
             btnGraph.TabIndex = 5;
             btnGraph.Text = "График";
             btnGraph.UseVisualStyleBackColor = true;
             btnGraph.Visible = false;
             btnGraph.Click += btnGraph_Click;
             // 
+            // cmbAdd
+            // 
+            cmbAdd.Font = new Font("Times New Roman", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbAdd.FormattingEnabled = true;
+            cmbAdd.Location = new Point(484, 18);
+            cmbAdd.Name = "cmbAdd";
+            cmbAdd.Size = new Size(154, 25);
+            cmbAdd.TabIndex = 6;
+            cmbAdd.Visible = false;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(650, 796);
+            Controls.Add(cmbAdd);
             Controls.Add(btnGraph);
-            Controls.Add(btnCreateOrder);
             Controls.Add(btnReport);
             Controls.Add(btnMyOrders);
             Controls.Add(flowLayoutPanel1);
@@ -130,7 +128,7 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Button btnMyOrders;
         private Button btnReport;
-        private Button btnCreateOrder;
         private Button btnGraph;
+        private ComboBox cmbAdd;
     }
 }
