@@ -6,7 +6,7 @@
 
         public string Title => txbTitle.Text.ToString();
         public string Description => txbDescription.Text.ToString();
-        
+
         public CreateSpecializationControl()
         {
             InitializeComponent();

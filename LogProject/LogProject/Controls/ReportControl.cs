@@ -1,5 +1,4 @@
 ﻿using LogProject.Database.Entities;
-using System.Collections.Generic;
 
 namespace LogProject.Controls
 {
@@ -25,14 +24,12 @@ namespace LogProject.Controls
 
         private void InitializeComboBox()
         {
-            // Заполнение комбобокса текущими заказами со статусом InProgress
             cmbOrder.Items.Clear();
             foreach (var order in _orders)
             {
                 cmbOrder.Items.Add(order.OrderID);
             }
 
-            // Другие заполнения комбобоксов
             cmbWellType.Items.Clear();
             foreach (var wellType in _wellTypes)
             {
