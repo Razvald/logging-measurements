@@ -25,7 +25,6 @@ namespace LogProject.Forms
 
         private bool IsAdminUser(int id)
         {
-            // Проверяем, есть ли администратор среди специалистов
             return _dbContext.Specialists.Any(s => s.Role == Role.Administrator && s.SpecialistID == id);
         }
 
@@ -111,7 +110,7 @@ namespace LogProject.Forms
             bool createNewClient = newOrderControl.CreateNewClient;
             string selectedClient = newOrderControl.SelectedClient;
 
-            int clientId = 0; // Инициализируем ClientID
+            int clientId = 0;
 
             if (createNewClient)
             {
@@ -122,7 +121,6 @@ namespace LogProject.Forms
                     Email = clientEmail
                 };
 
-                // Добавляем клиента в базу данных
                 _dbContext.Clients.Add(client);
                 _dbContext.SaveChanges();
 
@@ -169,7 +167,6 @@ namespace LogProject.Forms
                 double latitude = Math.Round(random.NextDouble() * (90 - (-90)) - 90, 3);
                 double longitude = Math.Round(random.NextDouble() * (180 - (-180)) - 180, 3);
                 string geoCoordinates = $"{latitude:F3}° {(latitude >= 0 ? "N" : "S")}, {longitude:F3}° {(longitude >= 0 ? "E" : "W")}";
-                // Здесь F3 означает форматирование с фиксированным количеством знаков после запятой (3 в данном случае).
 
                 var well = new Well
                 {
@@ -251,28 +248,20 @@ namespace LogProject.Forms
 
             int selectedOrderId = (sender as ReportControl).SelectedOrderId;
 
-            // Проверяем, что выбранный заказ не равен null
             if (selectedOrderId != null)
             {
-                // Получаем данные заказа из базы данных
                 var selectedOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderID == selectedOrderId);
 
-                // Проверяем, что заказ найден в базе данных и не равен null
                 if (selectedOrder != null)
                 {
-                    // Получаем данные измерения для выбранного заказа
                     var wellMeasurement = _dbContext.WellMeasurements.FirstOrDefault(wm => wm.MeasurementID == selectedOrder.MeasurementID);
 
-                    // Проверяем, что данные измерения не равны null
                     if (wellMeasurement != null)
                     {
-                        // Получаем данные скважины для выбранного заказа
                         var well = _dbContext.Wells.FirstOrDefault(w => w.WellID == selectedOrder.WellMeasurement.WellID);
 
-                        // Проверяем, что данные скважины не равны null
                         if (well != null)
                         {
-                            // Присваиваем значения элементам управления в соответствии с данными выбранного заказа
                             reportsControl.txbWellDepth.Text = well.Depth.ToString();
                             reportsControl.txbMeasurementValue.Text = wellMeasurement.MeasurementValue.ToString();
                             reportsControl.cmbWellType.Text = well.WellType.Name.ToString();
@@ -389,7 +378,6 @@ namespace LogProject.Forms
             var orders = GetOrdersWithStatus(OrderStatus.Waiting, OrderStatus.Cancelled);
             DisplayOrders(orders);
 
-            //cmbAdd.SelectedIndex = 0;
             cmbAdd.Items.Add("Создать заказ");
             cmbAdd.Items.Add("Создать специалиста");
             cmbAdd.Items.Add("Создать специализацию");
@@ -517,14 +505,12 @@ namespace LogProject.Forms
 
                 if (selectedSpecialist != null)
                 {
-                    // Отображаем имя специалиста в текстовом поле
                     specControl.label2.Text = selectedSpecialist.FullName;
 
-                    // Проверяем, есть ли у специалиста специализация
                     var specialization = selectedSpecialist.SpecialistSpecializations.FirstOrDefault();
                     if (specialization != null)
                     {
-                        specControl.label4.Text = specialization.Specialization.Name; // Отображаем название специализации
+                        specControl.label4.Text = specialization.Specialization.Name;
                     }
                     else
                     {
@@ -534,7 +520,6 @@ namespace LogProject.Forms
             }
             else
             {
-                // Если не выбран специалист, очищаем отображаемые данные
                 specControl.label2.Text = "";
                 specControl.label4.Text = "";
             }
@@ -578,8 +563,7 @@ namespace LogProject.Forms
             string Login = createSpecialist.Login;
 
             // Преобразуем строковое значение роли в перечисление Role
-            Role role;
-            if (!Enum.TryParse(createSpecialist.Role, out role))
+            if (!Enum.TryParse(createSpecialist.Role, out Role role))
             {
                 MessageBox.Show("Ошибка при определении роли.");
                 return;
@@ -591,7 +575,7 @@ namespace LogProject.Forms
                 Phone = Phone,
                 Password = Password,
                 Username = Login,
-                Role = role // Присваиваем перечисление Role
+                Role = role
             };
 
             try
