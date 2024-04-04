@@ -392,6 +392,7 @@ namespace LogProject.Forms
             //cmbAdd.SelectedIndex = 0;
             cmbAdd.Items.Add("Создать заказ");
             cmbAdd.Items.Add("Создать специалиста");
+            cmbAdd.Items.Add("Создать специализацию");
             cmbAdd.Items.Add("Связать специализацию");
         }
 
@@ -416,6 +417,44 @@ namespace LogProject.Forms
             if (cmbAdd.SelectedItem?.ToString() == "Связать специализацию")
             {
                 CreateSS(sender, e);
+            }
+            if (cmbAdd.SelectedItem?.ToString() == "Создать специализацию")
+            {
+                CreateS(sender, e);
+            }
+        }
+
+        private void CreateS(object sender, EventArgs e)
+        {
+            CreateSpecializationControl specControl = new();
+            specControl.SaveClicked += CreateSControl_SaveClicked;
+
+            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel1.Controls.Add(specControl);
+        }
+
+        private void CreateSControl_SaveClicked(object sender, EventArgs e)
+        {
+            CreateSpecializationControl specControl = (CreateSpecializationControl)sender;
+
+            string Title = specControl.Title;
+            string Desc = specControl.Description;
+
+            Specialization specialization = new Specialization
+            {
+                Name = Title,
+                Description = Desc
+            };
+
+            try
+            {
+                _dbContext.Specializations.Add(specialization);
+                _dbContext.SaveChanges();
+                MessageBox.Show("Специализация успешно создана.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
             }
         }
 
