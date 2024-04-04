@@ -13,6 +13,7 @@ namespace LogProject.Controls
         public CreateSpecializationControl(AppDbContext dbContext)
         {
             InitializeComponent();
+            _dbContext = dbContext;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
