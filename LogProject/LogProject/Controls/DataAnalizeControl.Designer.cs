@@ -46,9 +46,9 @@
             // 
             cmbWellType.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbWellType.FormattingEnabled = true;
-            cmbWellType.Location = new Point(3, 35);
+            cmbWellType.Location = new Point(3, 41);
             cmbWellType.Name = "cmbWellType";
-            cmbWellType.Size = new Size(293, 39);
+            cmbWellType.Size = new Size(293, 47);
             cmbWellType.TabIndex = 1;
             cmbWellType.SelectedIndexChanged += cmbWellType_SelectedIndexChanged;
             // 
@@ -57,15 +57,15 @@
             label1.AutoSize = true;
             label1.Location = new Point(3, 11);
             label1.Name = "label1";
-            label1.Size = new Size(128, 21);
+            label1.Size = new Size(161, 27);
             label1.TabIndex = 3;
             label1.Text = "Тип скважины";
             // 
             // btnReturn
             // 
-            btnReturn.Location = new Point(302, 35);
+            btnReturn.Location = new Point(302, 41);
             btnReturn.Name = "btnReturn";
-            btnReturn.Size = new Size(79, 39);
+            btnReturn.Size = new Size(91, 47);
             btnReturn.TabIndex = 4;
             btnReturn.Text = "Назад";
             btnReturn.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@
             // 
             // DataAnalizeControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(13F, 27F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btnReturn);
             Controls.Add(label1);

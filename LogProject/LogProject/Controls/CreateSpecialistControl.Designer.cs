@@ -45,10 +45,10 @@
             // 
             cmbRole.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbRole.FormattingEnabled = true;
-            cmbRole.Location = new Point(70, 179);
+            cmbRole.Location = new Point(81, 181);
             cmbRole.Margin = new Padding(4);
             cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(171, 31);
+            cmbRole.Size = new Size(171, 37);
             cmbRole.TabIndex = 44;
             // 
             // label1
@@ -58,22 +58,22 @@
             label1.Location = new Point(8, 15);
             label1.Margin = new Padding(6, 0, 6, 0);
             label1.Name = "label1";
-            label1.Size = new Size(48, 23);
+            label1.Size = new Size(63, 31);
             label1.TabIndex = 38;
             label1.Text = "Имя";
             // 
             // txbName
             // 
             txbName.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbName.Location = new Point(66, 6);
+            txbName.Location = new Point(81, 8);
             txbName.Margin = new Padding(4);
             txbName.Name = "txbName";
-            txbName.Size = new Size(227, 32);
+            txbName.Size = new Size(227, 38);
             txbName.TabIndex = 36;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(444, 162);
+            btnSave.Location = new Point(444, 165);
             btnSave.Margin = new Padding(4);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(138, 48);
@@ -89,7 +89,7 @@
             lblSpecializationName.Location = new Point(8, 187);
             lblSpecializationName.Margin = new Padding(6, 0, 6, 0);
             lblSpecializationName.Name = "lblSpecializationName";
-            lblSpecializationName.Size = new Size(52, 23);
+            lblSpecializationName.Size = new Size(67, 31);
             lblSpecializationName.TabIndex = 33;
             lblSpecializationName.Text = "Роль";
             lblSpecializationName.TextAlign = ContentAlignment.MiddleCenter;
@@ -97,10 +97,10 @@
             // txbPhone
             // 
             txbPhone.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbPhone.Location = new Point(103, 49);
+            txbPhone.Location = new Point(130, 51);
             txbPhone.Margin = new Padding(4);
             txbPhone.Name = "txbPhone";
-            txbPhone.Size = new Size(190, 32);
+            txbPhone.Size = new Size(190, 38);
             txbPhone.TabIndex = 46;
             // 
             // label4
@@ -110,17 +110,17 @@
             label4.Location = new Point(8, 58);
             label4.Margin = new Padding(6, 0, 6, 0);
             label4.Name = "label4";
-            label4.Size = new Size(85, 23);
+            label4.Size = new Size(112, 31);
             label4.TabIndex = 45;
             label4.Text = "Телефон";
             // 
             // txbLogin
             // 
             txbLogin.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbLogin.Location = new Point(83, 90);
+            txbLogin.Location = new Point(102, 92);
             txbLogin.Margin = new Padding(4);
             txbLogin.Name = "txbLogin";
-            txbLogin.Size = new Size(227, 32);
+            txbLogin.Size = new Size(227, 38);
             txbLogin.TabIndex = 48;
             // 
             // label5
@@ -130,17 +130,17 @@
             label5.Location = new Point(8, 99);
             label5.Margin = new Padding(6, 0, 6, 0);
             label5.Name = "label5";
-            label5.Size = new Size(65, 23);
+            label5.Size = new Size(84, 31);
             label5.TabIndex = 47;
             label5.Text = "Логин";
             // 
             // txbPassword
             // 
             txbPassword.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbPassword.Location = new Point(93, 131);
+            txbPassword.Location = new Point(116, 133);
             txbPassword.Margin = new Padding(4);
             txbPassword.Name = "txbPassword";
-            txbPassword.Size = new Size(227, 32);
+            txbPassword.Size = new Size(227, 38);
             txbPassword.TabIndex = 50;
             // 
             // label6
@@ -150,13 +150,13 @@
             label6.Location = new Point(8, 140);
             label6.Margin = new Padding(6, 0, 6, 0);
             label6.Name = "label6";
-            label6.Size = new Size(75, 23);
+            label6.Size = new Size(98, 31);
             label6.TabIndex = 49;
             label6.Text = "Пароль";
             // 
             // CreateSpecialistControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(13F, 27F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(txbPassword);
             Controls.Add(label6);

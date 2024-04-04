@@ -49,7 +49,7 @@
             lblClientName.Location = new Point(4, 20);
             lblClientName.Margin = new Padding(4, 0, 4, 0);
             lblClientName.Name = "lblClientName";
-            lblClientName.Size = new Size(79, 23);
+            lblClientName.Size = new Size(104, 31);
             lblClientName.TabIndex = 20;
             lblClientName.Text = "Клиент ";
             // 
@@ -60,14 +60,14 @@
             lblSpecializationName.Location = new Point(4, 172);
             lblSpecializationName.Margin = new Padding(4, 0, 4, 0);
             lblSpecializationName.Name = "lblSpecializationName";
-            lblSpecializationName.Size = new Size(145, 23);
+            lblSpecializationName.Size = new Size(188, 31);
             lblSpecializationName.TabIndex = 17;
             lblSpecializationName.Text = "Специализация";
             lblSpecializationName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(476, 161);
+            btnSave.Location = new Point(546, 159);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(107, 46);
             btnSave.TabIndex = 21;
@@ -79,18 +79,18 @@
             // 
             txbClientName.Enabled = false;
             txbClientName.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbClientName.Location = new Point(423, 12);
+            txbClientName.Location = new Point(461, 13);
             txbClientName.Name = "txbClientName";
-            txbClientName.Size = new Size(160, 32);
+            txbClientName.Size = new Size(160, 38);
             txbClientName.TabIndex = 23;
             // 
             // cmbClients
             // 
             cmbClients.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbClients.FormattingEnabled = true;
-            cmbClients.Location = new Point(90, 12);
+            cmbClients.Location = new Point(115, 14);
             cmbClients.Name = "cmbClients";
-            cmbClients.Size = new Size(121, 31);
+            cmbClients.Size = new Size(121, 37);
             cmbClients.TabIndex = 24;
             // 
             // label1
@@ -100,7 +100,7 @@
             label1.Location = new Point(294, 21);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(122, 23);
+            label1.Size = new Size(160, 31);
             label1.TabIndex = 25;
             label1.Text = "Имя клиента";
             // 
@@ -111,7 +111,7 @@
             label2.Location = new Point(294, 62);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(85, 23);
+            label2.Size = new Size(112, 31);
             label2.TabIndex = 26;
             label2.Text = "Телефон";
             // 
@@ -119,9 +119,9 @@
             // 
             txbClientPhone.Enabled = false;
             txbClientPhone.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbClientPhone.Location = new Point(386, 53);
+            txbClientPhone.Location = new Point(413, 55);
             txbClientPhone.Name = "txbClientPhone";
-            txbClientPhone.Size = new Size(160, 32);
+            txbClientPhone.Size = new Size(160, 38);
             txbClientPhone.TabIndex = 27;
             // 
             // label3
@@ -131,7 +131,7 @@
             label3.Location = new Point(294, 104);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(64, 23);
+            label3.Size = new Size(84, 31);
             label3.TabIndex = 28;
             label3.Text = "Почта";
             // 
@@ -139,9 +139,9 @@
             // 
             txbClientEmail.Enabled = false;
             txbClientEmail.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbClientEmail.Location = new Point(365, 95);
+            txbClientEmail.Location = new Point(385, 97);
             txbClientEmail.Name = "txbClientEmail";
-            txbClientEmail.Size = new Size(160, 32);
+            txbClientEmail.Size = new Size(160, 38);
             txbClientEmail.TabIndex = 29;
             // 
             // chbCreateNewClient
@@ -149,7 +149,7 @@
             chbCreateNewClient.AutoSize = true;
             chbCreateNewClient.Location = new Point(4, 57);
             chbCreateNewClient.Name = "chbCreateNewClient";
-            chbCreateNewClient.Size = new Size(224, 25);
+            chbCreateNewClient.Size = new Size(277, 31);
             chbCreateNewClient.TabIndex = 31;
             chbCreateNewClient.Text = "Создать нового клиента";
             chbCreateNewClient.UseVisualStyleBackColor = true;
@@ -159,14 +159,14 @@
             // 
             cmbSpecialization.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbSpecialization.FormattingEnabled = true;
-            cmbSpecialization.Location = new Point(156, 164);
+            cmbSpecialization.Location = new Point(199, 164);
             cmbSpecialization.Name = "cmbSpecialization";
-            cmbSpecialization.Size = new Size(121, 31);
+            cmbSpecialization.Size = new Size(121, 37);
             cmbSpecialization.TabIndex = 32;
             // 
             // CreateOrderControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(13F, 27F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(cmbSpecialization);
             Controls.Add(chbCreateNewClient);
@@ -183,7 +183,7 @@
             Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             Margin = new Padding(4);
             Name = "CreateOrderControl";
-            Size = new Size(586, 210);
+            Size = new Size(656, 210);
             ResumeLayout(false);
             PerformLayout();
         }

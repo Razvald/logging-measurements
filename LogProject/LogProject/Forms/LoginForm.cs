@@ -6,20 +6,36 @@ namespace LogProject
 {
     public partial class LoginForm : Form
     {
+        private string _selectedConnectionString;
         private int userId;
 
         public LoginForm()
         {
             InitializeComponent();
+            InitializeDatabaseComboBox();
+        }
+
+        private void InitializeDatabaseComboBox()
+        {
+            cmbDatabases.Items.Add("LogProject");
+            cmbDatabases.Items.Add("PanchenkoDS_107g2_Logging");
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (IsValidUser(txbLogin.Text, txbPassword.Text))
+            if (string.IsNullOrEmpty(_selectedConnectionString))
+            {
+                MessageBox.Show("Пожалуйста, выберите строку подключения.");
+                return;
+            }
+
+            using var dbContext = CreateDbContext();
+            var user = dbContext.Specialists.FirstOrDefault(u => u.Username == txbLogin.Text && u.Password == txbPassword.Text);
+
+            if (user != null)
             {
                 this.Hide();
-
-                MainForm mainForm = new(userId);
+                MainForm mainForm = new MainForm(user, dbContext);
                 mainForm.ShowDialog();
             }
             else
@@ -28,30 +44,34 @@ namespace LogProject
             }
         }
 
-        private bool IsValidUser(string username, string password)
+        private AppDbContext CreateDbContext()
         {
-            string connectionString = "Server=(local); Database=LogProject; Trusted_Connection=True; Integrated Security=true; MultipleActiveResultSets=true; TrustServerCertificate=true;";
-            //string connectionString = "Data Source=DBSRV\\AG2023; Initial Catalog=PanchenkoDS_107g2; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
-
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
-
-            using var dbContext = new AppDbContext(optionsBuilder.Options);
-            var user = dbContext.Specialists.FirstOrDefault(u => u.Username == username && u.Password == password);
-            if (user != null)
-            {
-                userId = user.SpecialistID;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            optionsBuilder.UseSqlServer(_selectedConnectionString);
+            return new AppDbContext(optionsBuilder.Options);
         }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDatabases.SelectedItem?.ToString() == "LogProject")
+            {
+                _selectedConnectionString = $"Server=(local); Database={cmbDatabases.SelectedItem}; Trusted_Connection=True; Integrated Security=true; MultipleActiveResultSets=true; TrustServerCertificate=true;";
+            }
+            else if (cmbDatabases.SelectedItem?.ToString() == "PanchenkoDS_107g2_Logging")
+            {
+                _selectedConnectionString = $"Data Source=DBSRV\\AG2023; Initial Catalog={cmbDatabases.SelectedItem}; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
+            }
+            else
+            {
+                _selectedConnectionString = $"Data Source=DBSRV\\AG2023; Initial Catalog={cmbDatabases.SelectedItem}; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
+            }
+
+            ConnectionManager.SetConnectionString(_selectedConnectionString);
         }
     }
 }

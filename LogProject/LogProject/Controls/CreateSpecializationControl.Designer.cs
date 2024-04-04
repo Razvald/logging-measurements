@@ -42,7 +42,7 @@
             label1.Location = new Point(6, 15);
             label1.Margin = new Padding(6, 0, 6, 0);
             label1.Name = "label1";
-            label1.Size = new Size(92, 23);
+            label1.Size = new Size(120, 31);
             label1.TabIndex = 62;
             label1.Text = "Название";
             // 
@@ -64,28 +64,28 @@
             lblSpecializationName.Location = new Point(6, 109);
             lblSpecializationName.Margin = new Padding(6, 0, 6, 0);
             lblSpecializationName.Name = "lblSpecializationName";
-            lblSpecializationName.Size = new Size(96, 23);
+            lblSpecializationName.Size = new Size(125, 31);
             lblSpecializationName.TabIndex = 60;
             lblSpecializationName.Text = "Описание";
             lblSpecializationName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // txbTitle
             // 
-            txbTitle.Location = new Point(107, 9);
+            txbTitle.Location = new Point(135, 11);
             txbTitle.Name = "txbTitle";
-            txbTitle.Size = new Size(270, 29);
+            txbTitle.Size = new Size(270, 35);
             txbTitle.TabIndex = 63;
             // 
             // txbDescription
             // 
-            txbDescription.Location = new Point(111, 103);
+            txbDescription.Location = new Point(140, 105);
             txbDescription.Name = "txbDescription";
-            txbDescription.Size = new Size(453, 29);
+            txbDescription.Size = new Size(414, 35);
             txbDescription.TabIndex = 64;
             // 
             // CreateSpecializationControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(13F, 27F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(txbDescription);
             Controls.Add(txbTitle);

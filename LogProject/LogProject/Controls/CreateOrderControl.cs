@@ -1,10 +1,13 @@
-﻿using LogProject.Database.Entities;
+﻿using LogProject.Database;
+using LogProject.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace LogProject.Controls
 {
     public partial class CreateOrderControl : UserControl
     {
-        public event EventHandler SaveClicked;
+        private readonly AppDbContext _dbContext;
+
         private List<Client> _clients;
         private List<Specialization> _specializations;
 
@@ -15,11 +18,12 @@ namespace LogProject.Controls
         public bool CreateNewClient => chbCreateNewClient.Checked;
         public string SelectedClient => cmbClients.SelectedItem?.ToString();
 
-        public CreateOrderControl(List<Client> clients, List<Specialization> specializations)
+        public CreateOrderControl(List<Client> clients, List<Specialization> specializations, AppDbContext dbContext)
         {
             InitializeComponent();
             _clients = clients;
             _specializations = specializations;
+            _dbContext = dbContext;
             InitializeComboBox();
         }
 
@@ -49,7 +53,47 @@ namespace LogProject.Controls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            SaveClicked?.Invoke(this, EventArgs.Empty);
+            int clientId = 0;
+
+            if (CreateNewClient)
+            {
+                Client client = new Client
+                {
+                    Name = ClientName,
+                    Phone = ClientPhone,
+                    Email = ClientEmail
+                };
+
+                _dbContext.Clients.Add(client);
+                _dbContext.SaveChanges();
+
+                clientId = client.ClientID;
+            }
+            else if (!string.IsNullOrEmpty(SelectedClient))
+            {
+                clientId = _dbContext.Clients.FirstOrDefault(c => c.Name == SelectedClient)?.ClientID ?? 0;
+            }
+
+            int specializationId = _dbContext.Specializations.FirstOrDefault(s => s.Name == Specialization)?.SpecializationID ?? 0;
+
+            Order order = new()
+            {
+                ClientID = clientId,
+                SpecializationID = specializationId,
+                OrderStatus = OrderStatus.Waiting,
+                OrderDate = DateTime.Now
+            };
+
+            try
+            {
+                _dbContext.Orders.Add(order);
+                _dbContext.SaveChanges();
+                MessageBox.Show("Заказ успешно создан.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
+            }
         }
     }
 }

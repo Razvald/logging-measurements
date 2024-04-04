@@ -42,10 +42,10 @@
             // 
             cmbSpecialisation.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbSpecialisation.FormattingEnabled = true;
-            cmbSpecialisation.Location = new Point(161, 110);
+            cmbSpecialisation.Location = new Point(204, 113);
             cmbSpecialisation.Margin = new Padding(4);
             cmbSpecialisation.Name = "cmbSpecialisation";
-            cmbSpecialisation.Size = new Size(171, 31);
+            cmbSpecialisation.Size = new Size(171, 37);
             cmbSpecialisation.TabIndex = 55;
             cmbSpecialisation.SelectedIndexChanged += cmbSpecialisation_SelectedIndexChanged;
             // 
@@ -56,7 +56,7 @@
             label1.Location = new Point(6, 15);
             label1.Margin = new Padding(6, 0, 6, 0);
             label1.Name = "label1";
-            label1.Size = new Size(114, 23);
+            label1.Size = new Size(149, 31);
             label1.TabIndex = 54;
             label1.Text = "Специалист";
             // 
@@ -78,7 +78,7 @@
             lblSpecializationName.Location = new Point(6, 118);
             lblSpecializationName.Margin = new Padding(6, 0, 6, 0);
             lblSpecializationName.Name = "lblSpecializationName";
-            lblSpecializationName.Size = new Size(145, 23);
+            lblSpecializationName.Size = new Size(188, 31);
             lblSpecializationName.TabIndex = 51;
             lblSpecializationName.Text = "Специализация";
             lblSpecializationName.TextAlign = ContentAlignment.MiddleCenter;
@@ -87,10 +87,10 @@
             // 
             cmbSpecialist.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbSpecialist.FormattingEnabled = true;
-            cmbSpecialist.Location = new Point(130, 7);
+            cmbSpecialist.Location = new Point(165, 9);
             cmbSpecialist.Margin = new Padding(4);
             cmbSpecialist.Name = "cmbSpecialist";
-            cmbSpecialist.Size = new Size(171, 31);
+            cmbSpecialist.Size = new Size(171, 37);
             cmbSpecialist.TabIndex = 56;
             cmbSpecialist.SelectedIndexChanged += cmbSpecialist_SelectedIndexChanged;
             // 
@@ -98,10 +98,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(311, 10);
+            label2.Location = new Point(6, 46);
             label2.Margin = new Padding(6, 0, 6, 0);
             label2.Name = "label2";
-            label2.Size = new Size(15, 23);
+            label2.Size = new Size(21, 31);
             label2.TabIndex = 57;
             label2.Text = " ";
             // 
@@ -109,10 +109,10 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(342, 113);
+            label3.Location = new Point(6, 162);
             label3.Margin = new Padding(6, 0, 6, 0);
             label3.Name = "label3";
-            label3.Size = new Size(15, 23);
+            label3.Size = new Size(21, 31);
             label3.TabIndex = 58;
             label3.Text = " ";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -121,16 +121,16 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(311, 42);
+            label4.Location = new Point(6, 77);
             label4.Margin = new Padding(6, 0, 6, 0);
             label4.Name = "label4";
-            label4.Size = new Size(15, 23);
+            label4.Size = new Size(21, 31);
             label4.TabIndex = 59;
             label4.Text = " ";
             // 
             // CreateSpecSpecControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(13F, 27F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label4);
             Controls.Add(label3);
