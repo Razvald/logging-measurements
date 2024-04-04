@@ -161,21 +161,20 @@ namespace LogProject.Forms
 
         private void cmbAdd_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbAdd.SelectedItem?.ToString() == "Создать заказ")
+            switch (cmbAdd.SelectedItem?.ToString())
             {
-                CreateOrder(sender, e);
-            }
-            if (cmbAdd.SelectedItem?.ToString() == "Создать специалиста")
-            {
-                CreateUser(sender, e);
-            }
-            if (cmbAdd.SelectedItem?.ToString() == "Связать специализацию")
-            {
-                CreateSS(sender, e);
-            }
-            if (cmbAdd.SelectedItem?.ToString() == "Создать специализацию")
-            {
-                CreateS(sender, e);
+                case "Создать заказ":
+                    CreateOrder(sender, e);
+                    break;
+                case "Создать специалиста":
+                    CreateUser(sender, e);
+                    break;
+                case "Связать специализацию":
+                    CreateSS(sender, e);
+                    break;
+                case "Создать специализацию":
+                    CreateS(sender, e);
+                    break;
             }
         }
 

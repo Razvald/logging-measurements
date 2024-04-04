@@ -1,4 +1,5 @@
 ﻿using LogProject.Database;
+using LogProject.Database.Entities;
 
 namespace LogProject.Controls
 {
@@ -53,12 +54,16 @@ namespace LogProject.Controls
 
         private void OrderControl_Click(object sender, EventArgs e)
         {
-            int orderId = int.Parse(OrderId);
-
-            DialogResult result = MessageBox.Show("Хотите взять этот заказ?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            if (!_dbContext.Specialists.Any(s => s.Role == Role.Administrator && s.SpecialistID == _userId))
             {
-                AcceptOrder(orderId);
+
+                int orderId = int.Parse(OrderId);
+
+                DialogResult result = MessageBox.Show("Хотите взять этот заказ?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    AcceptOrder(orderId);
+                }
             }
         }
 
