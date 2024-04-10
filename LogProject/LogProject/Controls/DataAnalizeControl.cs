@@ -1,5 +1,7 @@
 ﻿using LogProject.Database.Entities;
 using ScottPlot;
+using ScottPlot.Plottables;
+using Rectangle = ScottPlot.Plottables.Rectangle;
 
 namespace LogProject.Controls
 {
@@ -80,6 +82,8 @@ namespace LogProject.Controls
         {
             formsPlot1.Plot.Clear();
 
+            ScottPlot.Plot plot = formsPlot1.Plot;
+
             string selectedWellType = cmbWellType.SelectedItem?.ToString();
 
             var filteredWells = _wells.Where(w => w.WellType.Name == selectedWellType).ToArray();
@@ -89,24 +93,18 @@ namespace LogProject.Controls
                 .ToArray();
 
             // Создать массив значений для столбчатой диаграммы
-            double[] values = filteredWellMeasurements.Select(wm => wm.MeasurementValue / 10).ToArray();
-            double[] val = filteredWells.Select(m => m.Depth / 100 * -1).ToArray();
+            double[] values = filteredWellMeasurements.Select(wm => wm.MeasurementValue).ToArray();
+            double[] depths = filteredWells.Select(m => m.Depth).ToArray();
+            
+            Array.Sort(depths);
 
-            var barPlot = formsPlot1.Plot.Add.Bars(values);
-            var barPlot1 = formsPlot1.Plot.Add.Bars(val);
+            var s = plot.Add.Scatter(depths, values);
+            s.Smooth = true;
 
-            foreach (var bar in barPlot.Bars)
-            {
-                bar.Label = (bar.Value * 10).ToString();
-            }
+            plot.Axes.SetLimits(depths.Min(), depths.Max(), values.Min(), values.Max());
 
-            foreach (var bar in barPlot1.Bars)
-            {
-                bar.Label = (bar.Value * 100).ToString();
-            }
-
-            formsPlot1.Plot.XLabel("Скважина");
-            formsPlot1.Plot.YLabel("Значение измерения \n Глубина скважины");
+            plot.XLabel("Глубина");
+            plot.YLabel("Значение измерения");
 
             formsPlot1.Refresh();
         }
