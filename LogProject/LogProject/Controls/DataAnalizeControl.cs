@@ -1,5 +1,6 @@
 ﻿using LogProject.Database.Entities;
 using ScottPlot;
+using ScottPlot.Colormaps;
 using ScottPlot.Plottables;
 using Rectangle = ScottPlot.Plottables.Rectangle;
 
@@ -55,6 +56,7 @@ namespace LogProject.Controls
             pie.ExplodeFraction = .1;
             pie.ShowSliceLabels = true;
             pie.SliceLabelDistance = 1.3;
+            formsPlot1.Plot.Axes.SetLimits(-2.5, 2, 2.2, -2.4);
 
             formsPlot1.Plot.XLabel("");
             formsPlot1.Plot.YLabel("");
@@ -82,7 +84,7 @@ namespace LogProject.Controls
         {
             formsPlot1.Plot.Clear();
 
-            ScottPlot.Plot plot = formsPlot1.Plot;
+            Plot plot = formsPlot1.Plot;
 
             string selectedWellType = cmbWellType.SelectedItem?.ToString();
 
