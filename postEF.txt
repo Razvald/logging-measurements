@@ -1,1 +1,0 @@
-https://learn.microsoft.com/ru-ru/ef/core/get-started/overview/first-app?tabs=visual-studio
