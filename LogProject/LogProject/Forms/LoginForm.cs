@@ -7,7 +7,6 @@ namespace LogProject
     public partial class LoginForm : Form
     {
         private string _selectedConnectionString;
-        private int userId;
 
         public LoginForm()
         {
@@ -35,7 +34,7 @@ namespace LogProject
             if (user != null)
             {
                 this.Hide();
-                MainForm mainForm = new MainForm(user, dbContext);
+                MainForm mainForm = new(user, dbContext);
                 mainForm.ShowDialog();
             }
             else

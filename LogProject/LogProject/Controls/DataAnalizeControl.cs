@@ -1,8 +1,5 @@
 ﻿using LogProject.Database.Entities;
 using ScottPlot;
-using ScottPlot.Colormaps;
-using ScottPlot.Plottables;
-using Rectangle = ScottPlot.Plottables.Rectangle;
 
 namespace LogProject.Controls
 {
@@ -55,8 +52,8 @@ namespace LogProject.Controls
             var pie = formsPlot1.Plot.Add.Pie(slices);
             pie.ExplodeFraction = .1;
             pie.ShowSliceLabels = true;
-            pie.SliceLabelDistance = 1.3;
-            formsPlot1.Plot.Axes.SetLimits(-2.5, 2, 2.2, -2.4);
+            pie.SliceLabelDistance = 1.8;
+            formsPlot1.Plot.Axes.SetLimits(-2.5, 2, -2.2, 2.4);
 
             formsPlot1.Plot.XLabel("");
             formsPlot1.Plot.YLabel("");
