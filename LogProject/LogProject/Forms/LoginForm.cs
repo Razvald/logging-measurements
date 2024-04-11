@@ -22,6 +22,7 @@ namespace LogProject
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            Connection();
             if (string.IsNullOrEmpty(_selectedConnectionString))
             {
                 MessageBox.Show("Пожалуйста, выберите строку подключения.");
@@ -55,19 +56,19 @@ namespace LogProject
             Application.Exit();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void Connection()
         {
-            if (cmbDatabases.SelectedItem?.ToString() == "LogProject")
+            if (cmbDatabases.Text?.ToString() == "LogProject")
             {
                 _selectedConnectionString = $"Server=(local); Database={cmbDatabases.SelectedItem}; Trusted_Connection=True; Integrated Security=true; MultipleActiveResultSets=true; TrustServerCertificate=true;";
             }
-            else if (cmbDatabases.SelectedItem?.ToString() == "PanchenkoDS_107g2_Logging")
+            else if (cmbDatabases.Text?.ToString() == "PanchenkoDS_107g2_Logging")
             {
-                _selectedConnectionString = $"Data Source=DBSRV\\AG2023; Initial Catalog={cmbDatabases.SelectedItem}; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
+                _selectedConnectionString = $"Data Source=DBSRV\\AG2023; Initial Catalog={cmbDatabases.Text}; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
             }
             else
             {
-                _selectedConnectionString = $"Data Source=DBSRV\\AG2023; Initial Catalog={cmbDatabases.SelectedItem}; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
+                _selectedConnectionString = $"Data Source=DBSRV\\AG2023; Initial Catalog={cmbDatabases.Text}; Integrated Security=true; Trusted_Connection=True; MultipleActiveResultSets=true; TrustServerCertificate=true;";
             }
 
             ConnectionManager.SetConnectionString(_selectedConnectionString);

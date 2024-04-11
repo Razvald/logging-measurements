@@ -95,7 +95,6 @@
             cmbDatabases.Name = "cmbDatabases";
             cmbDatabases.Size = new Size(235, 34);
             cmbDatabases.TabIndex = 5;
-            cmbDatabases.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label3
             // 
